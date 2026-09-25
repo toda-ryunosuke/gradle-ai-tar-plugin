@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.rtoda3.plugins"
-version = "1.0.6"
+version = "1.0.8"
 
 gradlePlugin {
     website.set("https://github.com/toda-ryunosuke/gradle-ai-tar-plugin")

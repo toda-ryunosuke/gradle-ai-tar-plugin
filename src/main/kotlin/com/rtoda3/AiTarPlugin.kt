@@ -31,7 +31,7 @@ class AiTarPlugin : Plugin<Project> {
 
         // 1. ディレクトリツリー（tree）を自動生成するタスク
         val generateTreeTask = project.tasks.register("generateAiTree") {
-            val outputFile = project.layout.buildDirectory.file("generated/ai/project-tree.txt")
+            val outputFile = project.layout.buildDirectory.file("outputs/ai/${project.name}-tree.txt")
             outputs.file(outputFile)
 
             doLast {
