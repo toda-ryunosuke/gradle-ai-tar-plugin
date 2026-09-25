@@ -2,16 +2,23 @@ plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
     `maven-publish`
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 
 group = "com.rtoda3.plugins"
 version = "1.0.6"
 
 gradlePlugin {
+    website.set("https://github.com/toda-ryunosuke/gradle-ai-tar-plugin")
+    vcsUrl.set("https://github.com/toda-ryunosuke/gradle-ai-tar-plugin.git")
+
     plugins {
         create("aiTarPlugin") {
-            id = "com.rtoda3.ai-tar" // 利用側が指定するプラグインID
-            implementationClass = "com.rtoda3.AiTarPlugin" // 後で作成するクラスのフルパス
+            id = "com.rtoda3.ai-tar"
+            implementationClass = "com.rtoda3.AiTarPlugin"
+            displayName = "AI Context Tar Generator"
+            description = "Creates a clean, AI-readable project context tarball excluding binary files."
+            tags.set(listOf("ai", "tar", "llm", "context", "chatgpt", "gemini"))
         }
     }
 }
