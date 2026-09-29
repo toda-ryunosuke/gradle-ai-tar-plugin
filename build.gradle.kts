@@ -1,8 +1,10 @@
+import org.gradle.plugin.compatibility.compatibility
+
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
     `maven-publish`
-    id("com.gradle.plugin-publish") version "1.2.1"
+    id("com.gradle.plugin-publish") version "2.2.1"
 }
 
 group = "com.rtoda3.plugins"
@@ -19,6 +21,14 @@ gradlePlugin {
             displayName = "AI Context Tar Generator"
             description = "Creates a clean, AI-readable project context tarball excluding binary files."
             tags.set(listOf("ai", "tar", "llm", "context", "chatgpt", "gemini"))
+
+            // Gradle features compatibility declaration
+            compatibility {
+                features {
+                    configurationCache = false
+                    isolatedProjects = false
+                }
+            }
         }
     }
 }
