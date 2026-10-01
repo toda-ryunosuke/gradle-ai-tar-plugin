@@ -11,7 +11,7 @@ group = "com.rtoda3.plugins"
 version = "1.0.9"
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 gradlePlugin {
