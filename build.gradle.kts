@@ -8,7 +8,11 @@ plugins {
 }
 
 group = "com.rtoda3.plugins"
-version = "1.0.8"
+version = "1.0.9"
+
+kotlin {
+    jvmToolchain(11)
+}
 
 gradlePlugin {
     website.set("https://github.com/toda-ryunosuke/gradle-ai-tar-plugin")
@@ -25,7 +29,7 @@ gradlePlugin {
             // Gradle features compatibility declaration
             compatibility {
                 features {
-                    configurationCache = false
+                    configurationCache = true
                     isolatedProjects = false
                 }
             }

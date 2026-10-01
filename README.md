@@ -20,14 +20,14 @@ Designed to overcome file count limits and unsupported file type restrictions (s
 `build.gradle` (Groovy DSL)
 ```groovy
 plugins {
-    id 'com.rtoda3.ai-tar' version '1.0.8'
+    id 'com.rtoda3.ai-tar' version '1.0.9'
 }
 ```
 
 `build.gradle.kts` (Kotlin DSL)
 ```kotlin
 plugins {
-    id("com.rtoda3.ai-tar") version "1.0.8"
+    id("com.rtoda3.ai-tar") version "1.0.9"
 }
 ```
 
@@ -66,14 +66,14 @@ LLM（大規模言語モデル）へディレクトリごとソースコード�
 `build.gradle` (Groovy DSL)
 ```groovy
 plugins {
-    id 'com.rtoda3.ai-tar' version '1.0.8'
+    id 'com.rtoda3.ai-tar' version '1.0.9'
 }
 ```
 
 `build.gradle.kts` (Kotlin DSL)
 ```kotlin
 plugins {
-    id("com.rtoda3.ai-tar") version "1.0.8"
+    id("com.rtoda3.ai-tar") version "1.0.9"
 }
 ```
 

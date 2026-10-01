@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.bundling.Compression
 import org.gradle.api.tasks.bundling.Tar
 import java.io.File
+import org.gradle.api.plugins.HelpTasksPlugin
 
 class AiTarPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -31,19 +32,25 @@ class AiTarPlugin : Plugin<Project> {
 
         // 1. ディレクトリツリー（tree）を自動生成するタスク
         val generateTreeTask = project.tasks.register("generateAiTree") {
+            description = "Generates a directory tree text file for AI context (called by tarForAi task)"
+            
             val outputFile = project.layout.buildDirectory.file("outputs/ai/${project.name}-tree.txt")
             outputs.file(outputFile)
+
+            // ★ Configuration Cache対応: doLastの中でprojectオブジェクトに触れないよう、設定フェーズで値を取り出しておく
+            val projectName = project.name
+            val projectDir = project.projectDir
 
             doLast {
                 val file = outputFile.get().asFile
                 file.parentFile.mkdirs()
                 val sb = StringBuilder()
-                sb.append("Project: ${project.name}\n").append("=".repeat(30)).append("\n\n")
+                sb.append("Project: ${projectName}\n").append("=".repeat(30)).append("\n\n")
 
                 fun buildTree(dir: File, prefix: String) {
                     val files = dir.listFiles()
                         ?.filter { f ->
-                            // ★ ディレクトリの場合のみ除外判定し、ファイルはすべて残す
+                            // ディレクトリの場合のみ除外判定し、ファイルはすべて残す
                             !(f.isDirectory && f.name in excludeDirs)
                         }
                         ?.sortedWith(compareBy({ !it.isDirectory }, { it.name })) ?: return
@@ -59,15 +66,15 @@ class AiTarPlugin : Plugin<Project> {
                     }
                 }
 
-                buildTree(project.projectDir, "")
+                buildTree(projectDir, "")
                 file.writeText(sb.toString())
             }
         }
 
         // 2. Tarアーカイブを作成するタスク
         project.tasks.register("tarForAi", Tar::class.java) {
-            group = "ai"
-            description = "AI向けのプロジェクトtarアーカイブ(tree付き)を作成します"
+            group = HelpTasksPlugin.HELP_GROUP
+            description = "Creates a project tar archive (including a directory tree) optimized for AI context"
             dependsOn(generateTreeTask)
 
             compression = Compression.NONE
